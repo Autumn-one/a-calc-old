@@ -35,12 +35,18 @@ function infix2Postfix (exp) {
 
     let tempStr = ''; // 临时存储数字的字符串
     let symbolStr = '+-*/%()'; // 遇到这样的标识表示临时存储字符串应该进入队列了
+    let fIndex = exp.search(/\S/); // 储存第一个非空白字符的位置
     for ( let i = 0, len = exp.length; i < len; i++ ) {
         let cur = exp[i];
-        if ( cur == ' ' || symbolStr.indexOf(cur) !== -1 ) {
+        // 如果碰到符号连着符号的情况,例如某个负数前面就是括号, 某个负数前面有一加号 开头就是数字的
+        if(i === fIndex && "+-".includes(cur)){ // 处理第一个是负数的情况
+            tempStr += cur;
+            continue;
+        }
+
+        if ( cur === ' ' || symbolStr.indexOf(cur) !== -1 ) {
             if ( tempStr !== '' ) {
                 exprArr.push(tempStr);
-
                 tempStr = '';
             }
             if ( cur !== ' ' ) {
@@ -55,6 +61,9 @@ function infix2Postfix (exp) {
         exprArr.push(tempStr);
         tempStr = '';
     }
+
+    console.log("查看结果序列")
+    console.log(exprArr)
 
     while ( exprArr.length > 0 ) {
         let cur = exprArr.shift(); // 输入队列从头部取出一个

@@ -4,7 +4,7 @@
     "description": "JavaScript的字符串四则运算库, 支持格式化操作例如: 千分位格式化, 灵活指定小数点位数",
     "main": "dist/calc.umd.js",
     "scripts": {
-        "build": "webpack"
+        "build": "webpack --watch"
     },
     "files": [
         "example",
