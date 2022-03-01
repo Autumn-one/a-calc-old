@@ -2,7 +2,9 @@
     "name": "js-calc",
     "version": "1.0.0",
     "description": "JavaScript的字符串四则运算库, 支持格式化操作例如: 千分位格式化, 灵活指定小数点位数",
-    "main": "dist/calc.umd.js",
+    "main": "./dist/calc.js",
+    "module": "./dist/calc.es.js",
+    "browser": "./dist/calc.browser.js",
     "scripts": {
         "build": "webpack --watch"
     },
@@ -28,6 +30,7 @@
     },
     "devDependencies": {
         "ts-loader": "^9.2.6",
+        "ts-node": "^10.5.0",
         "webpack": "^5.69.1",
         "webpack-cli": "^4.9.2"
     }
