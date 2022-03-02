@@ -1,4 +1,3 @@
-let {calc, expr2que} = require("../dist/calc")
+let {calc} = require("../dist/calc_common.js")
 
-// console.log(calc("0.1+0.2"))
-console.log(calc("10000"))
+console.log(calc("100000 + 200 + -100 | >= 10,"))

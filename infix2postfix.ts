@@ -1,12 +1,12 @@
 import expr2que from "./expr2que"
 import { isOperator, prioraty } from './utils';
 
-function infix2postfix (exp) {
+function infix2postfix (expQue) {
     // 中缀表示法转后缀表示法
     let symbolQue = []; // 符号队列
     let outputQue = []; // 结果队列
 
-    let exprArr = expr2que(exp); // 表达式列表
+    let exprArr = expQue; // 表达式列表
 
     while ( exprArr.length > 0 ) {
         let cur = exprArr.shift(); // 输入队列从头部取出一个

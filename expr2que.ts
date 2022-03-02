@@ -3,7 +3,7 @@
 * */
 
 function expr2que (expr) {
-
+    
     let atomArr = []; // 原子列表
 
     let tempStr = ''; // 临时存储数字的字符串

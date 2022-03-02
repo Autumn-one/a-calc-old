@@ -3,11 +3,10 @@ module.exports = {
     mode: "production",
     entry: "./calc.ts",
     output: {
-        filename: "calc.js",
+        filename: "calc_common.js",
         path: path.resolve(__dirname, "dist"),
         library: {
-            type: "umd",
-            name: "calc",
+            type: "commonjs",
         },
         globalObject: "this"
     },

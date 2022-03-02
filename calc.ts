@@ -95,7 +95,7 @@ function parseFmtArgs (fmtStr): FormatParam {
 
 function fmtNumbro (numb, fmtStr): string {
     // 根据 fmtArgs 格式化一个 numbro 对象, 并返回最终结果
-    let result = "" // 最后的返回结果
+    let result = ''; // 最后的返回结果
 
     let fmtObj = parseFmtArgs(fmtStr);
     const {
@@ -104,8 +104,8 @@ function fmtNumbro (numb, fmtStr): string {
         mantissa_type,
     } = fmtObj;
 
-    let fmtParam: any = {} // 直接传给numbro的参数
-    if(thousandSeparated) fmtParam.thousandSeparated = thousandSeparated
+    let fmtParam: any = {}; // 直接传给numbro的参数
+    if ( thousandSeparated ) fmtParam.thousandSeparated = thousandSeparated;
 
     if ( mantissa_type ) { // 如果设置了位数相关就处理一下
         switch ( mantissa_type ) {
@@ -131,6 +131,8 @@ function fmtNumbro (numb, fmtStr): string {
             default:
                 throw new Error('尾数符号错误!');
         }
+    } else {
+        result = numb.format(fmtParam);
     }
 
 
@@ -145,11 +147,11 @@ function calc (...args) {
 
     let exprArr = expr2que(argsObj.expr);
     if ( exprArr.length === 1 ) { // 只有一个参数的时候直接进行格式化
-        return fmtNumbro(numbro(exprArr[0]),argsObj.fmt);
+        return fmtNumbro(numbro(exprArr[0]), argsObj.fmt);
     }
 
 
-    let resNumbro = evalPostfix(exprArr);
+    let resNumbro = evalPostfix(infix2Postfix(exprArr));
 
     // 根据 mantissa 和 mantissa_type 去处理尾数 根据 thousand 判断是否支持千分位
 

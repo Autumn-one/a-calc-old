@@ -7,7 +7,7 @@ function parseArgs (args): ReturnObj {
     // 处理传进来的参数, 输出统一格式的参数
     let result = {
         expr: "",
-        fmt: null,
+        fmt: "",
     };
 
     // 先定义一个最终的拼接字符串, 这个字符串经过一些判断计算得到
@@ -40,7 +40,7 @@ function parseArgs (args): ReturnObj {
 
 
     let calcArr = calcStr.split('|');
-    if(calcArr.length = 1){
+    if(calcArr.length === 1){
         result.expr = calcArr[0]
     }else{
         result.expr = calcArr[0]
