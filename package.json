@@ -1,6 +1,6 @@
 {
     "name": "a-calc",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "JavaScript的字符串四则运算库, 支持格式化操作例如: 千分位格式化, 灵活指定小数点位数",
     "main": "./dist/calc.js",
     "typings": "./calc.d.ts",
