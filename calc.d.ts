@@ -1,6 +1,7 @@
-declare function calc(...args: any): string;
-declare function fmt(...args: any): string;
+declare namespace a_calc {
+    export function calc (...args: any): string;
 
-export {
-    calc, fmt
+    export function fmt (...args: any): string;
 }
+
+export default a_calc;

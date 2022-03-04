@@ -1,9 +1,9 @@
-import js_calc from "../dist/calc.js";
+import a_calc from "../dist/calc.js";
 
 // console.log(calc("1 + 2 | =2"))
 // console.log(fmt("10000|,"))
 
-const { calc, fmt } = js_calc;
+const { calc, fmt } = a_calc;
 
 console.log(calc("1+1|>=2"));
 console.log(fmt("10000|,"));
