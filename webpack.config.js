@@ -1,28 +1,16 @@
 const path = require("path");
 module.exports = {
     mode: "production",
-    entry: "./calc.ts",
-    devtool: "inline-source-map",
+    entry: "./src/calc.js",
+    devtool: "source-map",
     output: {
         filename: "calc.js",
         path: path.resolve(__dirname, "dist"),
         library: {
             type: "umd",
-            name: "calc"
+            name: "a_calc"
         },
         globalObject: "this"
-    },
-    resolve: {
-        // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: [".ts", ".tsx", ".js"]
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                use: "ts-loader"
-            }
-        ]
     },
     externals: {
         numbro: {

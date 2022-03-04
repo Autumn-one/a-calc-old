@@ -1,11 +1,5 @@
 // 格式化对象
-interface FormatParam {
-    thousandSeparated?: boolean; // 控制千分位
-    mantissa?: number; // 控制具体尾数
-    mantissa_type?: string; // 位数控制标识
-}
-
-function parseFmtStr (fmtStr): FormatParam {
+function parseFmtStr (fmtStr) {
     // 根据格式化字符串导出一个对象 {thousandSeparated: null,mantissa: null,mantissa_type: null  }
     let argObj = {
         thousandSeparated: null,
@@ -28,7 +22,7 @@ function parseFmtStr (fmtStr): FormatParam {
     return argObj;
 }
 
-function fmtNumbro (numb, fmtStr): string {
+function fmtNumbro (numb, fmtStr) {
     // 根据 fmtArgs 格式化一个 numbro 对象, 并返回最终结果
     let result = ''; // 最后的返回结果
 
@@ -39,7 +33,7 @@ function fmtNumbro (numb, fmtStr): string {
         mantissa_type,
     } = fmtObj;
 
-    let fmtParam: any = {}; // 直接传给numbro的参数
+    let fmtParam = {}; // 直接传给numbro的参数
     if ( thousandSeparated ) fmtParam.thousandSeparated = thousandSeparated;
 
     if ( mantissa_type ) { // 如果设置了位数相关就处理一下

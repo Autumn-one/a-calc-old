@@ -1,4 +1,3 @@
-import { expr2que } from './expr2que';
 import { isOperator, prioraty } from './utils';
 
 function infix2postfix (expQue) {
@@ -12,15 +11,15 @@ function infix2postfix (expQue) {
         let cur = exprArr.shift(); // 输入队列从头部取出一个
 
         if ( isOperator(cur) ) {
-            if ( cur == '(' ) {
+            if ( cur === '(' ) {
                 symbolQue.push(cur);
-            } else if ( cur == ')' ) {
+            } else if ( cur === ')' ) {
                 let po = symbolQue.pop();
-                while ( po != '(' && symbolQue.length > 0 ) {
+                while ( po !== '(' && symbolQue.length > 0 ) {
                     outputQue.push(po);
                     po = symbolQue.pop();
                 }
-                if ( po != '(' ) { // 如果找不到左括号说明括号匹配有问题
+                if ( po !== '(' ) { // 如果找不到左括号说明括号匹配有问题
                     throw 'error: unmatched ()';
                 }
             } else {
@@ -38,7 +37,7 @@ function infix2postfix (expQue) {
     }
 
     if ( symbolQue.length > 0 ) {
-        if ( symbolQue[symbolQue.length - 1] == ')' || symbolQue[symbolQue.length - 1] == '(' ) {
+        if ( symbolQue[symbolQue.length - 1] === ')' || symbolQue[symbolQue.length - 1] === '(' ) {
             throw 'error: unmatched ()';
         }
         while ( symbolQue.length > 0 ) {

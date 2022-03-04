@@ -19,8 +19,8 @@ function evalPostfix (exprArr) {
             if ( outputStack.length < 2 ) {
                 throw 'unvalid stack length';
             }
-            let sec: any = outputStack.pop();
-            let fir: any = outputStack.pop();
+            let sec = outputStack.pop();
+            let fir = outputStack.pop();
             if ( typeof sec === 'string' ) {
                 sec = numbro(sec);
             }
@@ -56,7 +56,7 @@ function evalPostfix (exprArr) {
         }
     }
 
-    if ( outputStack.length != 1 ) {
+    if ( outputStack.length !== 1 ) {
         throw 'unvalid expression';
     } else {
         return outputStack[0];

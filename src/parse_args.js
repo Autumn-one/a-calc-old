@@ -1,9 +1,4 @@
-interface ReturnObj {
-    expr: string;
-    fmt: string | null;
-}
-
-function parseArgs (args): ReturnObj {
+function parseArgs (args) {
     // 处理传进来的参数, 输出统一格式的参数
     let result = {
         expr: '',
