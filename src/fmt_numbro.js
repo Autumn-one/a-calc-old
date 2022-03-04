@@ -34,7 +34,7 @@ function fmtNumbro (numb, fmtStr) {
     } = fmtObj;
 
     let fmtParam = {}; // 直接传给numbro的参数
-    if ( thousandSeparated ) fmtParam.thousandSeparated = thousandSeparated;
+    if ( thousandSeparated && !numb.value().toString().includes("e") ) fmtParam.thousandSeparated = thousandSeparated;
 
     if ( mantissa_type ) { // 如果设置了位数相关就处理一下
         switch ( mantissa_type ) {

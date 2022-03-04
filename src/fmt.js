@@ -12,7 +12,6 @@ function fmt (...args) {
 
     let exprNumbro = numbro(expr);
 
-
     return scienceToStr(fmtNumbro(exprNumbro, fmtStr));
 }
 
