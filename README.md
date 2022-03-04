@@ -3,6 +3,14 @@ A library of string four operations, which supports operations such as format ou
 
 (一个字符串四则运算的库, 可以解决前端数字计算精度问题, 支持千分位小数点格式化输出等操作)
 
+## 安装
+
+```
+npm install a-calc
+```
+
+
+
 ## 使用方式
 
 >支持的运算符: + - * / %
@@ -10,7 +18,9 @@ A library of string four operations, which supports operations such as format ou
 **纯计算:**
 
 ```js
-import { calc } from "js-calc"
+import a_calc from "a-calc"
+
+const { calc } = a_calc
 
 calc("0.1 + 0.2")
 
@@ -24,7 +34,9 @@ calc`1 + ${a} - ${b}`
 **格式化(千分位, 小数点控制):**
 
 ```js
-import { calc } from "js-calc"
+import a_calc from "a-calc"
+
+const { calc } = a_calc
 
 // 千分位
 calc("100000 + 100 | ,") // 竖线分割计算式和格式化字符串, 左边是计算式右边是格式化字符串
@@ -45,7 +57,9 @@ calc("100.000001 | = 2 ,")
 `calc("10000 | ,")` 这也是可行的, 可以认为一个数字的格式化也是经过计算得出的, 这种说法就没有什么问题, 但是如果你真的需要一个更好的语义那么可以通过如下的方式, 但是 calc 和 fmt 在做格式化的时候区别主要是名称的不同而已
 
 ```js
-import { fmt } from "js-calc"
+import a_calc from "a-calc"
+
+const { fmt } = a_calc
 
 fmt("10000.000001 | ,")
 
@@ -58,6 +72,5 @@ fmt("0.123456 | =2,")
 
 ## 注意
 
-- 该库暂未做科学记数法的处理,如果计算结果出现科学记数法会原样输出, 这个会在下一个版本更新掉
 - 禁止书写单值括号, 例如 `calc("(1) * 2 / (-0.001)")` 这是严厉禁止的, 虽然实现对这个写法的支持使比较简单的, 但是我认为这种写法完全没有必要, 而且还要多写逻辑
 
