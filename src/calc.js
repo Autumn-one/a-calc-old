@@ -75,7 +75,6 @@ function calc (...args) {
         return fmtNumbro(numbro(exprArr[0]), argsObj.fmt);
     }
 
-
     let resNumbro = evalPostfix(infix2postfix(exprArr));
 
     // 根据 mantissa 和 mantissa_type 去处理尾数 根据 thousand 判断是否支持千分位

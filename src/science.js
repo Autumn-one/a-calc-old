@@ -1,9 +1,10 @@
 // 处理科学记数法的问题
 function scienceToStr (numStr) {
     // 判断是否是科学记数法, 如果是就处理不是就直接返回原来的值
-    if(typeof numStr !== 'number'){
+    if(typeof numStr !== 'string'){
         numStr = numStr.toString()
     }
+
     if ( !numStr.includes('e') ) {
         return numStr;
     }

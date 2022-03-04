@@ -5,8 +5,12 @@ import a_calc from "../dist/calc.js";
 
 const { calc, fmt } = a_calc;
 
-console.log(calc("1+1|>=2"));
-console.log(fmt("10000|,"));
+// console.log(calc("1+1|>=2"));
+// console.log(fmt("10000|,"));
+
+// console.log(calc("0.1 + 0.2"))
+
+// console.log(fmt(""))
 
 // console.log(m)
 // console.log(expr2que("1 + 2"))
