@@ -2,12 +2,13 @@ const path = require("path");
 module.exports = {
     mode: "production",
     entry: "./calc.ts",
+    devtool: "inline-source-map",
     output: {
-        filename: "calc_browser.js",
+        filename: "calc.js",
         path: path.resolve(__dirname, "dist"),
         library: {
-            type: "var",
-            name: "calc",
+            type: "umd",
+            name: "calc"
         },
         globalObject: "this"
     },

@@ -1,4 +1,4 @@
-import expr2que from "./expr2que"
+import { expr2que } from './expr2que';
 import { isOperator, prioraty } from './utils';
 
 function infix2postfix (expQue) {
@@ -51,4 +51,4 @@ function infix2postfix (expQue) {
 }
 
 
-export default infix2postfix
+export { infix2postfix };
