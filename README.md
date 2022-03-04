@@ -1,4 +1,4 @@
-# js-calc
+# a-calc
 A library of string four operations, which supports operations such as format output of thousandth decimal point 
 
 (一个字符串四则运算的库, 可以解决前端数字计算精度问题, 支持千分位小数点格式化输出等操作)
