@@ -1,3 +1,5 @@
+import {scienceToStr} from "./science";
+
 // 格式化对象
 function parseFmtStr (fmtStr) {
     // 根据格式化字符串导出一个对象 {thousandSeparated: null,mantissa: null,mantissa_type: null  }
@@ -49,7 +51,9 @@ function fmtNumbro (numb, fmtStr) {
                 break;
             case '>=':
                 let resStr = numb.value();
-                let resArr = resStr.toString().split('.');
+                // 这里有可能toString之后是科学记数法,所以套一个科学记数法的方法
+                let resArr = scienceToStr(resStr.toString()).split('.');
+
                 if ( resArr.length === 1 || resArr[1].length < mantissa ) {
                     fmtParam.mantissa = mantissa;
                     result = numb.format(fmtParam);

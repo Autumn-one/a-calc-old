@@ -1,100 +1,90 @@
 # a-calc
-A library of string four operations, which supports operations such as format output of thousandth decimal point 
+A string of four operations of the library, can solve the js digital calculation accuracy of scientific notation and formatting problems, support for thousands of decimal point formatting output operations
 
-(一个字符串四则运算的库, 可以解决前端数字计算精度和科学记数法的问题, 支持千分位小数点格式化输出等操作)
+(一个字符串四则运算的库, 可以解决js数字计算精度 科学记数法和格式化的问题, 支持千分位小数点格式化输出等操作)
 
-## 安装
+> 支持的运算符: + - * / %
+
+## Install(安装)
 
 ```
 npm install a-calc
 ```
 
+## Import(引入)
 
+**commonjs**
 
-## 使用方式
+```js
+const {calc, fmt} = require("a-calc")
+```
 
->支持的运算符: + - * / %
-
-**快速使用:**
-
-该库导出两个函数,一个是 calc 一个 fmt; calc 用于计算与格式化; fmt 专门用于格式化
-
-
-
-calc有两种使用方式, 一种是传入字符串四则运算就会返回计算结果; 一种是当成标签字符串例如 calc\`1 + 1\` 这个也会计算并返回值
-
-`calc("1 + 1")` 与 calc\`1 + 1\` 等价 fmt 也如此
-
-
-
-fmt只有一种使用方式, fmt(“10000 | ,”) 返回 10000的千分位表示, fmt(“100 | =2”) 返回 100.00
-
-
-
-注意: 在 es module 中导入必须使用 `import a_calc from “a-calc”` 然后结构 `const {calc, fmt} = a_calc`, 在 commonjs 中没这个限制
-
-
-
-**纯计算:**
+**es module**
 
 ```js
 import a_calc from "a-calc"
 
-const { calc } = a_calc
+const {calc, fmt} = a_calc
+```
 
+**browser**
+
+```html
+<script src="node_modules/numbro/dist/numbro.js"></script>
+<script src="node_modules/a-calc/dist/calc.js"></script>
+<script>
+const {calc, fmt} = a_calc
+</script>
+```
+
+## Calculate(计算)
+
+```js
 calc("0.1 + 0.2") // 0.3
+calc`0.1 + 0.2` // 0.3
+// 以上方式等价
 
-calc("-0.1 + -0.2 * 0.3") // -0.16
-
-let a = 0.1
-let b = 0.2
-calc`1 + ${a} - ${b}` // 0.3
+calc("0.1 + 0.2 * 0.3 / 0.4 * (0.5 + 0.6)") // 0.265
 ```
 
 
 
-**格式化(千分位, 小数点控制):**
+## Calculate & Format (计算并格式化)
 
 ```js
-import a_calc from "a-calc"
-
-const { calc } = a_calc
+// 操作小数位数
+calc("0.1 + 0.2 | =2") // 0.30
+calc("0.11111 + 0.11111 | <=4") // 0.2222
+calc("0.11 + 0.11 | <=4") // 0.22
+calc("0.1 + 0.2 | >= 5") // 0.30000
+calc("0.0000001+ 0.0000001 | >= 5") // 0.0000002
 
 // 千分位
-calc("100000 + 100 | ,") // 竖线分割计算式和格式化字符串, 左边是计算式右边是格式化字符串
+calc("10000000 + 100000000 | ,") // 110,000,000
 
-// 小数点支持 = <= >= 这三个格式化标识
-calc("1 + 1 | =2") // 2.00  保留2位小数
-calc("10.001 - 0.001 | <=2") // 10 小数位小于等于2, 如果本身小于等于2就原样输出, 如果大于2就取2
-calc("100.00001 | >=5") // 100.000010 小数位大于等于2, 如果大于2位就原样输出, 如果小于2 就补齐2位
-
-// 千分位和小数位数的格式化可以混写不分顺序
-calc("1000000.000001 | = 2 ,") // 1,000,000.00
+// 同时指定小数位和千分位
+calc("10000000 + 100000000 | =10 ,") // 110,000,000.0000000000
 ```
 
 
 
-**单数字格式化**
-
-正常来说 calc 的字面意思就是计算一个值, 格式化的标识是在计算之后顺便做的一个事情, 但是有些时候希望对单个的数字进行格式化, 这种情况其实也可以使用 calc
-
-`calc("10000 | ,")` 这也是可行的, 可以认为一个数字的格式化也是经过计算得出的, 这种说法就没有什么问题, 但是如果你真的需要一个更好的语义那么可以通过如下的方式, 但是 calc 和 fmt 在做格式化的时候区别主要是名称的不同而已
+## Only Format(只格式化)
 
 ```js
-import a_calc from "a-calc"
+calc("0.1 | =2") // 0.10
+fmt("0.1 | =2") // 0.10
+// calc 具备 fmt 的功能, 但是fmt具备更好的语义
 
-const { fmt } = a_calc
- 
-fmt("10000.000001 | ,") // 10,000.000001
- 
-fmt("0.123456 | =2") // 0.12
-
-fmt("1111111.123456 | =2,") //  1,111,111.12
+fmt("1000000 | ,") // 1,000,000
 ```
 
 
 
-## 注意
+## Attention(注意)
 
-- 禁止书写单值括号, 例如 `calc("(1) * 2 / (-0.001)")` 这是严厉禁止的, 虽然实现对这个写法的支持使比较简单的, 但是我认为这种写法完全没有必要, 而且还要多写逻辑
+- Do not wrap parentheses around single numbers (不要对单个数字包裹括号)
+
+## Video Tutorial(视频教程)
+
+https://www.bilibili.com/video/BV17R4y1G7DS?from=search&seid=11611588186602414425&spm_id_from=333.337.0.0
 
