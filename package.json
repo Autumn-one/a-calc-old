@@ -1,6 +1,6 @@
 {
     "name": "a-calc",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "JavaScript的字符串四则运算库, 支持格式化操作例如: 千分位格式化, 灵活指定小数点位数",
     "main": "./dist/calc.js",
     "typings": "./calc.d.ts",
@@ -14,7 +14,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Autumn-one/js-calc.git"
+        "url": "git+https://github.com/Autumn-one/a-calc.git"
     },
     "keywords": [
         "四则运算",
@@ -26,9 +26,9 @@
     "author": "Autumn",
     "license": "MPL-2.0",
     "bugs": {
-        "url": "https://github.com/Autumn-one/js-calc/issues"
+        "url": "https://github.com/Autumn-one/a-calc/issues"
     },
-    "homepage": "https://github.com/Autumn-one/js-calc#readme",
+    "homepage": "https://github.com/Autumn-one/a-calc#readme",
     "dependencies": {
         "numbro": "^2.3.6"
     },
