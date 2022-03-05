@@ -17,7 +17,11 @@
         "url": "git+https://github.com/Autumn-one/js-calc.git"
     },
     "keywords": [
-        "字符串四则运算与格式化"
+        "四则运算",
+        "字符串四则运算",
+        "数字格式化",
+        "千分位",
+        "a-calc"
     ],
     "author": "Autumn",
     "license": "MPL-2.0",
