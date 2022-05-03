@@ -22,16 +22,13 @@ const {calc, fmt} = require("a-calc")
 **es module**
 
 ```js
-import a_calc from "a-calc"
-
-const {calc, fmt} = a_calc
+import {calc, fmt} from "a-calc"
 ```
 
 **browser**
 
 ```html
-<script src="node_modules/numbro/dist/numbro.js"></script>
-<script src="node_modules/a-calc/dist/calc.js"></script>
+<script src="node_modules/a-calc/browser/index.js"></script>
 <script>
 const {calc, fmt} = a_calc
 </script>
@@ -44,10 +41,17 @@ calc("0.1 + 0.2") // 0.3
 calc`0.1 + 0.2` // 0.3
 // 以上方式等价
 
+// 复杂一点的计算
 calc("0.1 + 0.2 * 0.3 / 0.4 * (0.5 + 0.6)") // 0.265
 ```
 
+**Fill and calculate(填充变量并计算)**
 
+```js
+let a = 0.000001
+let b = 888.789
+calc("a + b", {a,b}) // 0.000001 + 888.789 = 888.789001
+```
 
 ## Calculate & Format (计算并格式化)
 
@@ -86,5 +90,5 @@ fmt("1000000 | ,") // 1,000,000
 
 ## Video Tutorial(视频教程)
 
-https://www.bilibili.com/video/BV17R4y1G7DS?from=search&seid=11611588186602414425&spm_id_from=333.337.0.0
+待定
 
