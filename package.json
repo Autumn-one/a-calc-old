@@ -1,20 +1,41 @@
 {
     "name": "a-calc",
-    "version": "0.0.5",
+    "version": "0.0.30",
     "description": "JavaScript的字符串四则运算库, 支持格式化操作例如: 千分位格式化, 灵活指定小数点位数",
-    "main": "./dist/calc.js",
+    "main": "./es/index.js",
+    "exports": {
+        ".": {
+            "import": "./es/index.js",
+            "require": "./cjs/index.js"
+        },
+        "./es": {
+            "import": "./es/index.js",
+            "default": "./es/index.js"
+        },
+        "./cjs": {
+            "require": "./cjs/index.js",
+            "default": "./cjs/index.js"
+        }
+    },
+    "browser": "./browser/index.js",
+    "module": "./es/index.js",
     "typings": "./calc.d.ts",
     "scripts": {
-        "build": "webpack --watch"
+        "dev": "rollup -c -w  --environment build:dev",
+        "build": "rollup -c --environment build:build",
+        "build:w": "rollup -c -w --environment build:build",
+        "test": "cross-env ava"
     },
     "files": [
         "example",
-        "dist",
+        "es",
+        "cjs",
+        "browser",
         "calc.d.ts"
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Autumn-one/a-calc.git"
+        "url": "git+https://github.com/Autumn-one/a-calc-old.git"
     },
     "keywords": [
         "四则运算",
@@ -26,14 +47,27 @@
     "author": "Autumn",
     "license": "MPL-2.0",
     "bugs": {
-        "url": "https://github.com/Autumn-one/a-calc/issues"
+        "url": "https://github.com/Autumn-one/a-calc-old/issues"
     },
-    "homepage": "https://github.com/Autumn-one/a-calc#readme",
-    "dependencies": {
-        "numbro": "^2.3.6"
-    },
+    "homepage": "https://github.com/Autumn-one/a-calc-old#readme",
     "devDependencies": {
-        "webpack": "^5.69.1",
-        "webpack-cli": "^4.9.2"
+        "@babel/preset-env": "^7.17.10",
+        "@rollup/plugin-babel": "^5.3.1",
+        "@rollup/plugin-commonjs": "^22.0.0",
+        "@rollup/plugin-json": "^4.1.0",
+        "@rollup/plugin-node-resolve": "^13.2.1",
+        "ava": "^4.2.0",
+        "cross-env": "^7.0.3",
+        "glob": "^8.0.1",
+        "npm-run-all": "^4.1.5",
+        "rollup": "^2.70.2",
+        "rollup-plugin-livereload": "^2.0.5",
+        "rollup-plugin-serve": "^1.1.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-uglify": "^6.0.4"
+    },
+    "dependencies": {
+        "@babel/core": "^7.17.10",
+        "decimal.js": "^10.3.1"
     }
 }

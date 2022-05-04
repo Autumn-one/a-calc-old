@@ -3,7 +3,8 @@ A string of four operations of the library, can solve the js digital calculation
 
 (一个字符串四则运算的库, 可以解决js数字计算精度 科学记数法和格式化的问题, 支持千分位小数点格式化输出等操作)
 
-> 支持的运算符: + - * / %
+> Supported operators (支持的运算符) :  + - * / %
+>
 
 ## Install(安装)
 
@@ -91,4 +92,12 @@ fmt("1000000 | ,") // 1,000,000
 ## Video Tutorial(视频教程)
 
 待定
+
+## Issue To(问题提交)
+
+If you have any questions, pstlease send email to 718879459@qq.com as soon as possible to give me feedback
+
+(如果遇到了什么问题, 请第一时间向我发送反馈邮件, 718879459@qq.com 对于bug我会第一时间修复他)
+
+
 
