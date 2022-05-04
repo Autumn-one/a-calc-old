@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="./index.js"></script>
+<script>
+const {calc, fmt} = a_calc
+
+console.log(calc("a + b",{a: 1, b: 3}))
+console.log(fmt("100|=5"))
+let a = 0.000001
+let b = 888.789
+console.log(calc("a + b", {a,b}))
+
+console.log(calc("0.1 + 0.2 * 0.3 / 0.4 * (0.5 + 0.6)"))
+console.log(calc("0.11111 + 0.11111 | <=4"))
+
+// console.log(fmt("123"))
+
+a = 0.1
+b = 0.2
+let c = calc("a + b + 1 |= 2",{a,b})
+console.log(c)
+</script>
+</body>
+</html>
