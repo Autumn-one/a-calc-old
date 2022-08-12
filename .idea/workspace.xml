@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d42d46e5-f344-47f5-a0fb-cbb0deb81337" name="变更" comment="提交0.0.30版本信息" />
+    <list default="true" id="d42d46e5-f344-47f5-a0fb-cbb0deb81337" name="变更" comment="提交0.0.30版本信息">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +12,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -22,6 +26,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
@@ -37,7 +43,7 @@
       <updated>1651676012432</updated>
       <workItem from="1651676013704" duration="585000" />
       <workItem from="1652018589868" duration="348000" />
-      <workItem from="1660273589155" duration="408000" />
+      <workItem from="1660273589155" duration="876000" />
     </task>
     <task id="LOCAL-00001" summary="提交0.0.30版本信息">
       <created>1651676100662</created>
@@ -64,7 +70,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="last" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
