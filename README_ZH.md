@@ -12,6 +12,8 @@
 
 > 支持的运算符 :  + - * / % ** 
 
+语言：简体中文|[英文](https://www.npmjs.com/package/a-calc)
+
 ## 安装
 
 ```
