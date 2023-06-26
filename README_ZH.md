@@ -213,14 +213,12 @@ calc("111111 + 11111 | ,",{_fmt: "=2"}) // 122,222.00 很显然 , 和 =2 被组�
 
 ```typescript
 import { calc } from "a-calc";
-import type {CalcConfig} from "a-calc";
 import get from "lodash/get"
 
-function calc_wrap ( expr: string, obj?: CalcConfig )
+function calc_wrap ( expr: string, obj?: any )
 {
-    const instance: any = getCurrentInstance();
 
-    const data_arr = [ get( instance, "setupState" ), get( instance, "data" ) ];
+    const data_arr: any[] = [ ];
     const options = { _error: "-" };
 
     if ( obj !== undefined )
@@ -251,24 +249,22 @@ export {
 
 ### 模板中的使用方式
 
-模板中的calc可以访问到所有的setup中定义的状态，所以可以直接写，有些时候状态状态来自于作用域插槽，那就在额外传入第二个参数。
-
 ```vue
 <style>
 </style>
 
 <template>
     <div class="demo-autumn">
-        {{ calc( "a + (b + state.c) * state.d" ) }}
+        <!-- 推荐的写法 -->
+        {{ calc( "a + (b + c) * d", state ) }}
     </div>
 </template>
 
 <script lang="ts" setup>
 
-const a = 1;
-const b = 2;
-
 const state = reactive( {
+    a：1,
+    b: 2,
     c: 3,
     d: 4
 } );
@@ -278,8 +274,6 @@ const state = reactive( {
 
 ### script setup中的使用方式
 
-这个需要注意了，在setup顶级作用域中直接使用 `calc` 是访问不到setup内部状态的，但是在生命周期中是可以直接访问到的。
-
 ```vue
 <script lang="ts" setup>
 
@@ -291,12 +285,7 @@ const state = reactive( {
     d: 4
 } );
 
-console.log( calc( "c + d", state ) ); // 这里是setup顶层作用域所以访问不到内部状态，需要通过第二个参数注入数据
-
-onMounted( () =>
-{
-    console.log( calc( "a + b + state.c + state.d" ) ); // 生命周期函数中可以不用注入
-} );
+console.log( calc( "a + b + c + d", {...state, a, b} ) );
 
 </script>
 ```
@@ -314,6 +303,8 @@ calc("a + b", {a,b}) // 推荐写法，因为更清晰
 
 ## 版本变更
 
+* 1.2.6
+    - 调整vue3集成代码，由于vue3的组件实例在开发环境和生成环境有所不同，所以生产环境无法获取state，但是开发环境可以获取。
 * 1.2.0
     - 很小的破坏性更新， 以前的`-e` 和 `-n` 分别变成 `!e` 和 `!n`
     - 文档更新
