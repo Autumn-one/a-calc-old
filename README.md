@@ -203,91 +203,40 @@ calc("1 + 2sd + d", {
 calc("111111 + 11111 | ,",{_fmt: "=2"}) // 122,222.00 Obviously , and =2 are combined, and the formatted string in the expression has higher priority
 ```
 
-## Use gestures in projects(vue3)
+## How to re-encapsulate in the project?
 
-> It is not good to write a huge second parameter in the project, so you should find a way to fix it. The following is just a demonstration in the VUE project
+The core ` calc ` function may not be extremely convenient in a real project, so ` a-calc ` provides a built-in secondary encapsulation function ` calc_wrap ` after version `1.2.10`, which is essentially an extension of ` calc `, so it has all the functions of the former, just more flexible writing and powerful type derivation.
 
-### Integration into vue3 templates
+Note that this may not be the only correct way to encapsulate. I just provide this function. There is no dogma here. You should be flexible in your own scenarios.
 
-You can use `unplugin-auto-import` to automatically integrate it into the template, see the documentation of the corresponding plugin, or use the `app.config.globalProperties` binding of vue if you want to integrate it manually
+I suggest that if you decide to introduce ` calc_wrap ` into your project, you can rename it to ` calc ` so that you can write a few fewer characters. The following shows some flexible writing and powerful type derivation.
 
 ```typescript
-import { calc } from "a-calc";
-import get from "lodash/get"
+// Note that calc_wrap is renamed calc here, because if you need to use the calc_wrap function, you basically don't need the core calc function, so if you have this idle name, you should use it
+import { calc_wrap as calc } from "a-calc";
 
-function calc_wrap ( expr: string, obj?: any )
-{
-
-    const data_arr: any[] = [ ];
-    const options = { _error: "-" };
-
-    if ( obj !== undefined )
-    {
-        data_arr.unshift( obj );
-        Object.keys( obj ).forEach( key => key.startsWith( "_" ) && ( options[key] = obj[key] ) );
-    }
-
-    return calc( expr, {
-        _fill_data: data_arr,
-        ...options
-    } );
-}
-
-const fmt = calc;
-
-export {
-    calc_wrap as calc,
-    fmt
-};
-```
-
-### Integrated into script setup
-
-Still using the above functions, you can still use the `unplugin-auto-import` plugin to automatically import them, and the actual development experience is like `calc` is a global function without import.
-
-Of course if you don't use this plugin to import automatically then you need to import it every time you write.
-
-### Usage in templates
-
-```vue
-<style>
-</style>
-
-<template>
-    <div class="demo-autumn">
-        <!-- Recommended writing -->
-        {{ calc( "a + (b + c) * d", state ) }}
-    </div>
-</template>
-
-<script lang="ts" setup>
-
-const state = reactive( {
-    a：1,
+const state = {
+    a: 1,
     b: 2,
-    c: 3,
-    d: 4
-} );
+    c: 3
+};
 
-</script>
-```
+// When the parameter passed in is a formula without variable name, the calculation result will be returned directly
+calc( "(1 + 2) * 3" ); // Return type: string | number
 
-### Usage in script setup
+// When the incoming argument is a formula that is suspected to contain a variable name and there is no second data source argument, it returns a function waiting for the incoming data source. Yes, this function is done by statically typed derivation
+calc( "(a + b) * c" ); // Return type: ( data: any ) => string | number
+calc( "(a + b) * c" )( state ); // Return type: string | number
 
-```vue
-<script lang="ts" setup>
+// Maybe you want to inject state first and then enter an expression, which is also ok
+calc( state ); // Return type: ( expr: string | number ) => string | number
+calc( state )( "(a + b) * c" ); // Return type: string | number
 
-const a = 1;
-const b = 2;
+// The original usage is naturally supported
+calc( "a + b + c", state ); // Return type: string | number
 
-const state = reactive( {
-    c: 3,
-    d: 4
-} );
-
-console.log( calc( "a + b + c + d", { ...state, a, b } ) );
-
-</script>
+// You can still mix the configuration with the data source, which is very convenient
+calc( "a + b + c" )( { ...state, _error: 0 } );
 ```
 
 ### Disrecommended writing
@@ -303,6 +252,9 @@ calc("a + b", {a,b}) // Recommended writing style because it is clearer
 
 ## Version change
 
+* 1.2.10
+    - Remove the vue integration example, the library itself is not bound to a front-end framework, to avoid misunderstanding, remove the corresponding integration code.
+    - Add `calc_wrap` function, which is the second wrapping of the core function `calc` and can be used directly.
 * 1.2.6
     - Adjust the vue3 integration code, because the vue3 component instances differ between the development environment and the production environment, the production environment cannot get the state, but the development environment can.
 * 1.2.0

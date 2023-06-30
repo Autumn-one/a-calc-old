@@ -203,91 +203,40 @@ calc("1 + 2sd + d", {
 calc("111111 + 11111 | ,",{_fmt: "=2"}) // 122,222.00 很显然 , 和 =2 被组合起来了,且表达式中的格式化字符串优先级更高
 ```
 
-## 在项目中的使用姿势(vue3为例)
+## 怎样在项目中二次封装？
 
-> 在项目中编写庞大的第二个参数是不好的, 所以第二个参数你应该想办法固定他, 下面只是一个在VUE项目中的演示
+在实际的项目中核心的 `calc` 函数可能还不够极致的便捷，因此`a-calc` 在 `1.2.10` 版本之后提供了一个内置的二次封装的函数`calc_wrap`，它本质是 `calc` 的扩展，所以它拥有所有前者的功能只是多了更多灵活的写法，和强大的类型推导。
 
-### 集成到vue3模板
+注意这也许不是唯一正确的封装方式，我只是提供了这个功能而已，这里没有教条，你应该灵活应对你自己的场景。
 
-下面是包装函数，模板和 script setup 中都可以使用这个函数，可以使用 `unplugin-auto-import` 自动集成到模板中，具体看对应插件的文档，如果你想手动集成就使用 vue 的`app.config.globalProperties`绑定就好了
+我建议如果决定将 `calc_wrap` 引入项目，那么你可以将其重命名为 `calc` 这样可以少写几个字符，下面将展示一些灵活的写法和强大的类型推导。
 
 ```typescript
-import { calc } from "a-calc";
-import get from "lodash/get"
+// 注意这里将 calc_wrap 重命名为 calc, 因为如果你需要使用 calc_wrap 函数的时候，基本用不到核心的 calc 函数，那么有这个闲置好名字就应该拿来用
+import { calc_wrap as calc } from "a-calc";
 
-function calc_wrap ( expr: string, obj?: any )
-{
-
-    const data_arr: any[] = [ ];
-    const options = { _error: "-" };
-
-    if ( obj !== undefined )
-    {
-        data_arr.unshift( obj );
-        Object.keys( obj ).forEach( key => key.startsWith( "_" ) && ( options[key] = obj[key] ) );
-    }
-
-    return calc( expr, {
-        _fill_data: data_arr,
-        ...options
-    } );
-}
-
-const fmt = calc;
-
-export {
-    calc_wrap as calc,
-    fmt
-};
-```
-
-### 集成到script setup中
-
-还是使用上面的函数，依然可以使用 `unplugin-auto-import` 插件来自动导入，实际开发的体验就像是`calc` 是一个全局函数一样，不用import。
-
-当然如果你不用这个插件自动导入那么就需要每次写的时候都import一下。
-
-### 模板中的使用方式
-
-```vue
-<style>
-</style>
-
-<template>
-    <div class="demo-autumn">
-        <!-- 推荐的写法 -->
-        {{ calc( "a + (b + c) * d", state ) }}
-    </div>
-</template>
-
-<script lang="ts" setup>
-
-const state = reactive( {
-    a：1,
+const state = {
+    a: 1,
     b: 2,
-    c: 3,
-    d: 4
-} );
+    c: 3
+};
 
-</script>
-```
+// 当传入的参数是一个不含变量名的计算式将会直接返回计算结果
+calc( "(1 + 2) * 3" ); // 返回类型: string | number
 
-### script setup中的使用方式
+// 当传入的参数是一个疑似包含变量名的计算式且没有第二个数据源参数时，会返回一个等待传入数据源的函数，没错这个功能通过静态类型的推导做到了
+calc( "(a + b) * c" ); // 返回类型: ( data: any ) => string | number
+calc( "(a + b) * c" )( state ); // 返回类型: string | number
 
-```vue
-<script lang="ts" setup>
+// 也许你希望先注入状态然后在输入表达式，这也是可以的
+calc( state ); // 返回类型: ( expr: string | number ) => string | number
+calc( state )( "(a + b) * c" ); // 返回类型: string | number
 
-const a = 1;
-const b = 2;
+// 原本的用法自然也是支持的
+calc( "a + b + c", state ); // 返回类型: string | number
 
-const state = reactive( {
-    c: 3,
-    d: 4
-} );
-
-console.log( calc( "a + b + c + d", {...state, a, b} ) );
-
-</script>
+// 你依然可以将配置与数据源混合在一起，这是非常方便的
+calc( "a + b + c" )( { ...state, _error: 0 } );
 ```
 
 ### 不推荐的写法
@@ -303,6 +252,9 @@ calc("a + b", {a,b}) // 推荐写法，因为更清晰
 
 ## 版本变更
 
+* 1.2.10
+    - 删除vue集成示例，该库本身不于某个前端框架绑定，为避免误解，删除对应集成代码。
+    - 增加 `calc_wrap` 功能，该函数是对核心函数 `calc` 的二次封装，可以拿来直接使用。
 * 1.2.6
     - 调整vue3集成代码，由于vue3的组件实例在开发环境和生成环境有所不同，所以生产环境无法获取state，但是开发环境可以获取。
 * 1.2.0
