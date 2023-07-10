@@ -174,7 +174,15 @@ fmt("0.1 | =2") // 0.10
 fmt("1000000 | ,") // 1,000,000
 ```
 
+## Configure version number printing and library update detection
 
+You can turn the console on or off to print the version number of the current library, or you can turn the console on or off to prompt if there is a new version update.
+
+```typescript
+import { calc_config } from "a-calc"
+calc_config.open_console_version(); // Turn on console version printing
+calc_config.open_check_update(); // Turn on the function of detecting updates, and remind the console if there are updates
+```
 
 ## Advanced skills
 
@@ -252,6 +260,9 @@ calc("a + b", {a,b}) // Recommended writing style because it is clearer
 
 ## Version change
 
+* 1.2.30
+    - Previous versions would have controlled the print version number by default, now it is configurable and turned off by default
+    - Provides the function of detecting updates, after opening if there is a new version of this will give a prompt in the console
 * 1.2.10
     - Remove the vue integration example, the library itself is not bound to a front-end framework, to avoid misunderstanding, remove the corresponding integration code.
     - Add `calc_wrap` function, which is the second wrapping of the core function `calc` and can be used directly.
