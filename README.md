@@ -1,7 +1,7 @@
 # a-calc
 A convenient library for accurate calculation and formatting of numbers, which can solve the following problems:
 
-* Size: uncompressed size 35-43KB. Gzip compression size 13-15KB
+* Size: uncompressed size 56KB. Gzip compression size 18KB
 * Make the number calculation of javascript accurate
 * Other third-party libraries have poor coding experience and inconvenient formatting
 * Scientific notation of possible output of numerical calculation
