@@ -179,9 +179,9 @@ fmt("1000000 | ,") // 1,000,000
 You can turn the console on or off to print the version number of the current library, or you can turn the console on or off to prompt if there is a new version update.
 
 ```typescript
-import { calc_config } from "a-calc"
-calc_config.open_console_version(); // Turn on console version printing
-calc_config.open_check_update(); // Turn on the function of detecting updates, and remind the console if there are updates
+import { calc_util } from "a-calc"
+calc_util.print_version(); // Print version in console
+calc_util.check_update(); // Enable the update detection function, if there are updates will be alerted in the console
 ```
 
 ## Advanced skills
@@ -230,21 +230,21 @@ const state = {
 };
 
 // When the parameter passed in is a formula without variable name, the calculation result will be returned directly
-calc( "(1 + 2) * 3" ); // Return type: string | number
+calc( "(1 + 2) * 3" ); // Return type: string
 
 // When the incoming argument is a formula that is suspected to contain a variable name and there is no second data source argument, it returns a function waiting for the incoming data source. Yes, this function is done by statically typed derivation
-calc( "(a + b) * c" ); // Return type: ( data: any ) => string | number
-calc( "(a + b) * c" )( state ); // Return type: string | number
+calc( "(a + b) * c" ); // Return type: ( data: any ) => string
+calc( "(a + b) * c" )( state ); // Return type: string
 
 // Maybe you want to inject state first and then enter an expression, which is also ok
-calc( state ); // Return type: ( expr: string | number ) => string | number
-calc( state )( "(a + b) * c" ); // Return type: string | number
+calc( state ); // Return type: ( expr: string | number ) => string
+calc( state )( "(a + b) * c" ); // Return type: string
 
 // The original usage is naturally supported
-calc( "a + b + c", state ); // Return type: string | number
+calc( "a + b + c", state ); // Return type: string
 
 // You can still mix the configuration with the data source, which is very convenient
-calc( "a + b + c" )( { ...state, _error: 0 } );
+calc( "a + b + c" )( { ...state, _error: 0 } ); // Return type: string | 0
 ```
 
 ### Disrecommended writing
@@ -260,6 +260,10 @@ calc("a + b", {a,b}) // Recommended writing style because it is clearer
 
 ## Version change
 
+* 1.3.0
+    - Disruptive changes: Adjust how the version number printing function and the detection update function are called
+    - Perfect type hint
+    - Add more unit tests
 * 1.2.30
     - Previous versions would have controlled the print version number by default, now it is configurable and turned off by default
     - Provides the function of detecting updates, after opening if there is a new version of this will give a prompt in the console

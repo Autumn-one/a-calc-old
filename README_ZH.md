@@ -179,9 +179,9 @@ fmt("1000000 | ,") // 1,000,000
 你可以开启或关闭控制台打印当前库的版本号，也可以开启或关闭控制台提示当前是否有新的版本更新。
 
 ```typescript
-import { calc_config } from "a-calc"
-calc_config.open_console_version(); // 开启控制台版本打印
-calc_config.open_check_update(); // 开启检测更新功能，如果有更新会在控制台提醒
+import { calc_util } from "a-calc"
+calc_util.print_version(); // 在控制台打印版本
+calc_util.check_update(); // 开启检测更新功能，如果有更新会在控制台提醒
 ```
 
 ## 高级技巧
@@ -230,21 +230,21 @@ const state = {
 };
 
 // 当传入的参数是一个不含变量名的计算式将会直接返回计算结果
-calc( "(1 + 2) * 3" ); // 返回类型: string | number
+calc( "(1 + 2) * 3" ); // 返回类型: string
 
 // 当传入的参数是一个疑似包含变量名的计算式且没有第二个数据源参数时，会返回一个等待传入数据源的函数，没错这个功能通过静态类型的推导做到了
-calc( "(a + b) * c" ); // 返回类型: ( data: any ) => string | number
-calc( "(a + b) * c" )( state ); // 返回类型: string | number
+calc( "(a + b) * c" ); // 返回类型: ( data: any ) => string
+calc( "(a + b) * c" )( state ); // 返回类型: string
 
 // 也许你希望先注入状态然后在输入表达式，这也是可以的
-calc( state ); // 返回类型: ( expr: string | number ) => string | number
-calc( state )( "(a + b) * c" ); // 返回类型: string | number
+calc( state ); // 返回类型: ( expr: string | number ) => string
+calc( state )( "(a + b) * c" ); // 返回类型: string
 
 // 原本的用法自然也是支持的
-calc( "a + b + c", state ); // 返回类型: string | number
+calc( "a + b + c", state ); // 返回类型: string
 
 // 你依然可以将配置与数据源混合在一起，这是非常方便的
-calc( "a + b + c" )( { ...state, _error: 0 } );
+calc( "a + b + c" )( { ...state, _error: 0 } ); // 返回类型: string | 0
 ```
 
 ### 不推荐的写法
@@ -260,6 +260,10 @@ calc("a + b", {a,b}) // 推荐写法，因为更清晰
 
 ## 版本变更
 
+* 1.3.0
+    - 破环性变更：调整版本号打印功能和检测更新功能的调用方式
+    - 完善类型提示
+    - 添加更多的单元测试
 * 1.2.30
     - 之前的版本默认会在控制打印版本号，现在它是可配置的，而且默认关闭
     - 提供了检测更新功能，开启之后如果有新版本会在控制台给出提示
