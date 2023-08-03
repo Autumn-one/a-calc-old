@@ -260,6 +260,8 @@ calc("a + b", {a,b}) // Recommended writing style because it is clearer
 
 ## Version change
 
+* 1.3.4
+    - Resolve the bug of rounding and rounding to six formatting errors（bug provider: nanarino）
 * 1.3.0
     - Disruptive changes: Adjust how the version number printing function and the detection update function are called
     - Perfect type hint
