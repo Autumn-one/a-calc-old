@@ -106,6 +106,10 @@ calc("1.123$$$ + 2.88% | + =6", {_unit: true}) // +4.003000$$$
 
 After `1.0.6`, calculations with units can have more parameters, `_unit` can take values like `boolean | "on" | "off" | "auto" | "space"` The parameters look like a lot, but they are similar to the previous usage, `true "on" "auto"` has the same effect, it means that it automatically recognizes the number after the The biggest difference is that the `"space"` value means that only spaces are used as unit separators. For example, if your units happen to be `+-`, which would be recognized as an operator in normal mode, you can use the `"space"` mode, but then spaces are required, and you would write it like this: `calc ("2+- * 3")` The final result is: `6+-`
 
+
+
+In practice, you may want the final result not to carry units automatically. In versions after `1.3.6`, you can remove the units from the result with the formatting parameter `!u`, or `!n` can output the number directly.
+
 ## Calculate and format
 
 Formatting supports the following features: limit decimal places, Keep Plus and minus signs, percentage output, scientific notation output, and kilobyte output, and they can be combined, but there are individual combinations that are not valid, try This yourself. There are too many combinations to list one by one.
@@ -118,7 +122,8 @@ Formatting supports the following features: limit decimal places, Keep Plus and 
 - `+` Output positive numbers with `+` sign
 - `%` Output a percentage number that can be used in combination with restricted decimals
 - `!e` The output is scientific notation and e can be capitalized
-- `!n` The output is a number, not a numeric string, and N can be uppercase, but if you set percentiles, fractions, or percentages, disk formatting and so on, this option does not take effect
+- `!n` The output is a number rather than a numeric string, n can be capitalized, and after version 1.3.6 this has the highest priority, any other formatting parameter cannot affect this parameter.
+- `!u` Remove units from results
 
 ```js
 // Operational decimal places
@@ -260,6 +265,10 @@ calc("a + b", {a,b}) // Recommended writing style because it is clearer
 
 ## Version change
 
+* 1.3.6
+    - The `!n` formatting parameter is adjusted to the highest priority and any other formatting parameter cannot affect it.
+    - New `!u` formatting parameter to remove the unit part of the result
+    - Type Hint Enhancement
 * 1.3.4
     - Resolve the bug of rounding and rounding to six formatting errors（bug provider: nanarino）
 * 1.3.0
