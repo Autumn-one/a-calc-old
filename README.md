@@ -265,6 +265,7 @@ calc("a + b", {a,b}) // Recommended writing style because it is clearer
 
 ## Version change
 
+* 1.3.9 Fixed the failed rounding issue caused by formatting some injected variables to 0 (Problem reporter: MangMax)
 * 1.3.8 Solve the packaging failure caused by the upgrade of vite5.x (Feedback from 武建鹏)
 * 1.3.6
     - The `!n` formatting parameter is adjusted to the highest priority and any other formatting parameter cannot affect it.
