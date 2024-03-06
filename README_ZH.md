@@ -27,7 +27,7 @@ npm install a-calc
 ```js
 const {calc, fmt} = require("a-calc")
 // 或者
-const {calc, fmt} = require("a-calc/cjs") // 注意这个写法是明确指定使用cjs版本这是有意义的, 有些打包工具会对语法做转换, 直接写 a-calc 不好使(nuxt.js就是), 那就换成 a-calc/cjs 试试
+const {calc, fmt} = require("a-calc/cjs") // 注意这个写法是明确指定使用cjs版本, 有些打包工具会对语法做转换, 直接写 a-calc 不好使, 那就换成 a-calc/cjs 试试
 ```
 
 **es module**
@@ -348,7 +348,7 @@ calc("a + b", {a,b}) // 推荐写法，因为更清晰
 
 ## 问题提交
 
-(如果遇到了什么问题, 请第一时间向我发送反馈邮件, 718879459@qq.com 对于bug我会第一时间修复他)
+反馈问题请携带错误案例和尽可能多的问题信息，请勿发一句极其抽象与概括的话当做问题反馈！你未提供的信息我不能通过预测获得。通常工作日一天内会发布新版修复问题。
 
 
 
