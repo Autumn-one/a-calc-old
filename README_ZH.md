@@ -1,4 +1,6 @@
 # a-calc
+![Static Badge](https://img.shields.io/badge/a--calc-1.3.11-green?link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)
+
 来源于实际业务的数字字符串四则运算的库, 可解决以下问题:
 
 * 体积：未压缩体积56KB 。gzip压缩体积18KB
@@ -12,7 +14,7 @@
 
 > 支持的运算符 :  + - * / % ** 
 
-语言：简体中文|[英文](https://www.npmjs.com/package/a-calc)
+**Language：** 简体中文 | [英文](https://www.npmjs.com/package/a-calc)
 
 ## 安装
 

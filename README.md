@@ -1,4 +1,6 @@
 # a-calc
+![Static Badge](https://img.shields.io/badge/a--calc-1.3.11-green?style=flat&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)
+
 A library for performing four operations on numeric strings originating from actual business can solve the following problems:
 
 * Size: Uncompressed volume is 56KB. Gzip compressed volume is 18KB.
