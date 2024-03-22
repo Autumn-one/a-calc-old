@@ -1,7 +1,7 @@
 # a-calc
-![Static Badge](https://img.shields.io/badge/a--calc-1.3.11-green?style=flat&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)
+[![Static Badge](https://img.shields.io/badge/a--calc-1.3.12-green?style=flat)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old)
 
-A library for performing four operations on numeric strings originating from actual business can solve the following problems:
+A number precision calculation library derived from actual business, which can solve the following problems:
 
 * Size: Uncompressed volume is 56KB. Gzip compressed volume is 18KB.
 * The precision problem of JS numerical computation.
@@ -49,7 +49,7 @@ const {calc, fmt} = a_calc
 </script>
 ```
 
-## Four arithmetic operations (supports scientific notation)
+## Simple calculations (supports scientific notation)
 
 ```js
 calc("0.1 + 0.2") // 0.3
@@ -335,7 +335,7 @@ calc("a + b", {a,b}) // Recommended writing, because it is clearer.
     * Comprehensive unit testing
     * Detection of more boundary cases
 * 0.0.72
-    * Support writing single numerical values with units, for example `calc("1 yuan", {_unit: true})` or `fmt("1 yuan | =2",{_unit: true})`
+    * Support writing single numerical values with units, for example `calc("1yuan", {_unit: true})` or `fmt("1yuan | =2",{_unit: true})`
     * Supplement documentation
 
 ## Attention
@@ -349,6 +349,3 @@ To be determined
 ## Issue submission
 
 When providing feedback, please include error examples and as much information about the issue as possible. Avoid submitting overly abstract or general statements as feedback! A new version addressing the problem will typically be released within one working day.
-
-
-

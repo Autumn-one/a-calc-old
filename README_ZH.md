@@ -1,5 +1,5 @@
 # a-calc
-![Static Badge](https://img.shields.io/badge/a--calc-1.3.11-green?link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc) ![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)
+[![Static Badge](https://img.shields.io/badge/a--calc-1.3.12-green?style=flat)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old)
 
 来源于实际业务的数字字符串四则运算的库, 可解决以下问题:
 
