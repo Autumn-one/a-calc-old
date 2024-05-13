@@ -1,20 +1,23 @@
 # a-calc
-[![Static Badge](https://img.shields.io/badge/a--calc-1.3.12-green?style=flat)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old)
+[![npm version](https://img.shields.io/npm/v/a-calc.svg)](https://www.npmjs.com/package/a-calc) [![Static Badge](https://img.shields.io/bundlephobia/minzip/a-calc?label=minzipped)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![npm downloads](https://img.shields.io/npm/dw/a-calc)](https://www.npmjs.com/package/a-calc)
 
-A number precision calculation library derived from actual business, which can solve the following problems:
+**Black people should go back to Africa!**
 
-* Size: Uncompressed volume is 56KB. Gzip compressed volume is 18KB.
-* The precision problem of JS numerical computation.
-* The coding experience with other third-party libraries is poor and formatting is not convenient enough.
-* Number calculations may output in scientific notation
-* Numeric formatting, thousand-separator output, direct formatting into percentage, retaining positive or negative signs, direct fraction output, etc.
-* Calculation or formatting of numbers with units, e.g. `0.1% + 2%`
-* Calculation using scientific notation, e.g. `-2e3 + 6`
-* Supports four kinds of rounding rules: truncating, incrementing, rounding, and rounding to even (a more precise method).
+## Features and Advantages
+
+**:baby_chick:Easy** Push the coding experience to the extreme, the minimalist API is easy to remember.
+
+**:rocket:Fast** Continuously optimizing details, it now operates very quickly.
+
+**💪Powerful** Precise number calculation, number formatting, complete rounding rules, unit calculation, robust type hinting.
+
+**:snake:Flexible** The flexible API allows you to write freely, however you want.
+
+**:corn:Practical** Born from actual business, it covers all practical operations in the business.
 
 > Supported operators :  + - * / % ** 
 
-**Language：** English | [简体中文](https://github.com/Autumn-one/a-calc-old/blob/main/README_ZH.md)
+**Document language：** English | [简体中文](https://github.com/Autumn-one/a-calc-old/blob/main/README_ZH.md)
 
 ## Installation
 
@@ -29,7 +32,7 @@ npm install a-calc
 ```js
 const {calc, fmt} = require("a-calc")
 // or
-const {calc, fmt} = require("a-calc/cjs") // Note that this syntax specifically uses the cjs version. Some bundlers will transform the syntax. If writing a-calc directly doesn't work, try changing it to a-calc/cjs.
+const {calc, fmt} = require("a-calc/cjs")
 ```
 
 **es module**
@@ -40,59 +43,70 @@ import {calc, fmt} from "a-calc"
 const {calc, fmt} from "a-calc/es"
 ```
 
-**browser**
+**Browser side**
 
 ```html
-<script src="node_modules/a-calc/browser/index.js"></script>
+<script src="https://unpkg.com/a-calc@latest/browser/index.js"></script> <!-- cdn -->
+<script src="node_modules/a-calc/browser/index.js"></script> <!-- After installing npm, you can also import it locally. Choose either option. -->
 <script>
 const {calc, fmt} = a_calc
 </script>
 ```
 
-## Simple calculations (supports scientific notation)
+## Get Started
 
-```js
-calc("0.1 + 0.2") // 0.3
+```typescript
+calc("0.1 + 0.2") // "0.3"
 
-// More complex calculation
-calc("0.1 + 0.2 * 0.3 / 0.4 * (0.5 + 0.6)") // 0.265
+// A more complex calculation
+calc("0.1 + 0.2 * 0.3 / 0.4 * (0.5 + 0.6)") // "0.265"
 
-// Calculation in scientific notation
-calc("-2e2 + 3e+2") // 100
+// Scientific notation calculation
+calc("-2e2 + 3e+2") // "100"
+
+// Calculations with units
+calc("0.1% + 0.2%", {_unit: true}) // "0.3%"
+
+// Variable operation
+calc("(a * (b + c))", {a: 1, b: 2, c: 3}) // "5"
+calc("(a * (b + c))", [{a: 1, b: 2}, {c: 3}]) // "5"
+calc("a + b", {a: "2$", b: "4$", _unit: true}) // "6$"
+calc("a + b", {_fill_data: [{a: "2$"}, {b: "4$"}], _unit: true}) // "6$"
+
+// Calculate and format: Thousands separator
+calc("a + b | ,", {a:324232421123, b: 234234242422321}) // "234,558,474,843,444"
+// Calculate and format: fractions
+calc("2 * 3 | /") // "6/1"
+// Calculate and format: output numbers.
+calc("1 + 1 | !n") // 2
 ```
 
 ## About the space
 
-Spaces are not necessary in cases where there is no ambiguity, and it can even correctly parse the hard-to-read-by-human formula `calc("-2e+2+3e+2")`. However, this makes the clarity too low. Please try your best to write clearer code instead of shit! <span style="color: red;">Always include spaces in your calculation, which makes it more beautiful and clear, just like the examples I wrote!!!</span>
-
-By the way, here's an ambiguous formula `calc("50%%2", {_unit: true})`. This ambiguity obviously occurs in calculations with units. Since the parser doesn't know if your unit is `%` or `%%`, you should use a space to give a clear meaning. The correct way to write is `calc("50% % 2", {_unit: true})`.
-
-In short, always add spaces!
+By default, spaces in expressions are not required unless you are using the space or space-all mode. Introductions to these two modes are specifically mentioned in the high performance section. However, I recommend that you always include space in expressions, which looks clearer and more beautiful.
 
 ## Fill in variables and calculate (important)
-
-**The calculated value is precise and scientific notation will not appear.**
 
 ```js
 let a = 0.000001
 let b = 888.789
-calc("a + b", {a,b}) // 0.000001 + 888.789 = 888.789001
+calc("a + b", {a,b}) // "888.789001"
 
 calc("a * (b + c) % d + 7.123", [
     {a: 1, b: 2},
     {c: 3, d: 4}
-]) // 8.123
+]) // "8.123"
 
 // A bit more complex
 calc("1 + o.a / arr[0].d",{
     o: { a: 2 },
     arr: [{ d: 8 }]
-}) // 1.25
+}) // "1.25"
 
 calc("a + b - c",[
     {a: 1},
     {b: 2, c: 3}
-])
+]) // "0"
 ```
 
 ## Calculation with units
@@ -101,12 +115,13 @@ calc("a + b - c",[
 
 ```js
 // Please note that _unit is required and not enabled by default. This is because calculations with units will perform some additional operations, and in contrast, pure numerical calculations are faster.
-calc("1 + 2%", {_unit: true}) // 3%
+calc("1 + 2%", {_unit: true}) // "3%"
 
-calc("1.123$$$ + 2.88% | + =6", {_unit: true}) // +4.003000$$$
+calc("1.123$$$ + 2.88% | + =6", {_unit: true}) // "+4.003000$$$"
+
+// Starting from a-calc@2.0.0, the array form of filling data can also be configured. You can use the configuration object as the first or the last parameter of the array. These are the only two positions that are supported.
+calc("a + b", [{a: "1%", b: "2%"}, {_unit: true}]) // "3%"
 ```
-
-After version 1.0.6, calculations with units can have more parameters. The value of `_unit` can be `boolean | "on" | "off" | "auto" | "space"`. The parameters seem to be a lot but actually are similar to the previous usage. The effects of `true "on" "auto"` are the same, which means to automatically recognize the unit after the number. `false "off"` means to turn off the unit calculation. The biggest difference is the "space" value, which only treats the space as a unit separator. For example, if your unit happens to be +-, it will be recognized as an operator in normal mode, so you can use the "space" mode. But in this case, the space is necessary. You should write like this: `calc("2+- * 3")`. The final result is: `6+-`.
 
 In actual development, you may hope that the final result does not automatically carry units. In versions after 1.3.6, you can remove units from the result through the formatting parameter `!u`, or you can directly output the number with `!n`.
 
@@ -127,29 +142,29 @@ Formatting supports the following functions: limiting the number of decimal plac
 
 ```js
 // Operate the decimal places
-calc("0.1 + 0.2 | =2") // 0.30
-calc("0.11111 + 0.11111 | <=4") // 0.2222
-calc("0.11 + 0.11 | <=4") // 0.22
-calc("0.1 + 0.2 | >= 5") // 0.30000
-calc("0.0000001+ 0.0000001 | >= 5") // 0.0000002
+calc("0.1 + 0.2 | =2") // "0.30"
+calc("0.11111 + 0.11111 | <=4") // "0.2222"
+calc("0.11 + 0.11 | <=4") // "0.22"
+calc("0.1 + 0.2 | >= 5") // "0.30000"
+calc("0.0000001+ 0.0000001 | >= 5") // "0.0000002"
 
 // Preserve positive and negative signs
-calc("1 + 1 | +") // +2
+calc("1 + 1 | +") // "+2"
 
 // Thousandth place
-calc("10000000 + 100000000 | ,") // 110,000,000
+calc("10000000 + 100000000 | ,") // "110,000,000"
 
 // Fraction
-calc("0.025 + 0.2 | /") // 9/40
+calc("0.025 + 0.2 | /") // "9/40"
 
 // Percentage
-calc("1 + 1 | %") // 200%
+calc("1 + 1 | %") // "200%"
 
 // Scientific notation, note that this e can also be capitalized
-calc("1 + 1 | !e") // 2e+0
+calc("1 + 1 | !e") // "2e+0"
 
 // Simultaneously specify decimals and thousandth place while preserving the positive and negative signs
-calc("10000000 + 100000000 | +,=10") // +110,000,000.0000000000
+calc("10000000 + 100000000 | +,=10") // "+110,000,000.0000000000"
 ```
 
 ## Four kinds of rounding rules
@@ -162,9 +177,9 @@ The rounding rules are added to the part of the formatting string, and their sym
 - `~6` Round to Even, this rounding rule is more accurate than the normal rounding. The rule is different when the number after the rounding is 5. It will check the position after 5. If the number after 5 is not 0, it will increment. If the number after 5 is 0, it will check whether the number before 5 is even or not. If it is even, it will not increment. If it is not even, it will increment.
 
 ```js
-calc("0.11 + 0.22 | =1 ~+") // 0.4 Keep one place and increment it
-calc("0.55 | =1 ~5") // 0.6
-calc("0.65 | =1 ~6") // 0.6
+calc("0.11 + 0.22 | =1 ~+") // "0.4" Keep one place and increment it
+calc("0.55 | =1 ~5") // "0.6"
+calc("0.65 | =1 ~6") // "0.6"
 ```
 
 This newly added rounding rule seems to make the formatting part longer, but the actual situation is not like this. Generally, the rounding rule of a project is fixed, so the formatting part of the rounding rule should be encapsulated in the default formatting parameters. When it is actually used, there is no need to write this part of the content at all. Refer to the following `default formatting` instructions.
@@ -172,11 +187,11 @@ This newly added rounding rule seems to make the formatting part longer, but the
 ## Only format
 
 ```js
-calc("0.1 | =2") // 0.10
-fmt("0.1 | =2") // 0.10
+calc("0.1 | =2") // "0.10"
+fmt("0.1 | =2") // "0.10"
 // calc has the function of fmt, but fmt has better semantics
 
-fmt("1000000 | ,") // 1,000,000
+fmt("1000000 | ,") // "1,000,000"
 ```
 
 ## Configure version number printing and library update detection
@@ -213,7 +228,7 @@ calc("1 + 2sd + d", {
 > In actual projects, you can optimize the development experience through default formatting.
 
 ```js
-calc("111111 + 11111 | ,",{_fmt: "=2"}) // 122,222.00 Obviously , and =2 are combined, and the format string in the expression has a higher priority.
+calc("111111 + 11111 | ,",{_fmt: "=2"}) // "122,222.00" Obviously , and =2 are combined, and the format string in the expression has a higher priority.
 ```
 
 ## How to encapsulate for the second time in the project?
@@ -261,10 +276,71 @@ calc(`${a} + ${b}`) // This way of writing is not recommended.
 calc("a + b", {a,b}) // Recommended writing, because it is clearer.
 ```
 
+## High performance
 
+This section will teach you how to squeeze every last bit of performance out of a-calc. a-calc 2.x is several times faster than 1.x at its peak performance.
+
+### Memory cache
+
+You can use the _memo parameter to enable calculation caching. In most cases, we will use variables to participate in calculations. If the formulas composed of variables are the same, then the cache will also be used.
+
+```typescript
+calc("a + b", {a：1， b: 2, _memo: true})
+calc("c + d", {c: 8, d: 9, _memo: true})
+// The two calculations above have not optimized a performance point, that is, the formulas are not universal. The same two numbers are added but different formulas are used, a + b and c + d are different formulas. Although this is the same pattern, a-calc will only remember the same formula.
+calc("a * (b - c)", {a: 1, b: 2, c: 3, _memo: true})
+calc("a * (b - c)", {a: 8, b: 2.88, c: 3.8, _memo: true})
+// The above two can fully utilize the ability of formula memory.
+```
+
+**Cache cleanup**
+
+By default, the cache function is turned off. This is because the cache requires you to decide when to clean it up, otherwise it may cause excessive memory usage. a-calc provides you with a cleanup function, you just need to call it at the right time.
+
+```typescript
+import {clear_memo, get_memo_size} from "a-calc"
+
+clear_memo() // By default, a maximum of 5000 cache results are retained. However, if the cache item is used less than 100 times, it will be cleared. Of course, you can also set this yourself.
+clear_memo({maximum: 10000, use_count: 200}) // "maximum" indicates the maximum number of caches retained after cleanup, and "use_count" represents the cleanup of caches with less than this reuse count.
+get_memo_size() // return type: number You can use this method to return the current number of caches, and you can decide whether or not to clear the cache based on this information.
+```
+
+### The space and space-all modes
+
+Both the space and space-all modes can improve a certain level of performance, but these two modes have higher requirements for code writing. The space mode requires strict insertion of spaces between each unit in the calculation part, while the space-all not only requires spaces to be strictly inserted in the calculation part, but also requires spaces to be inserted in the fmt formatting part.
+
+```typescript
+calc("1+1", {_mode: "space"}) // This writing cannot be computed because it lacks spaces.
+calc("1 + 1", {_mode: "space"}) // This is correct
+calc("1 + (2 * 3)", {_mode: "space"}) // This approach is also correct, as special handling has been applied to parentheses. The parentheses can be placed next to the internal numbers or variable names, or they can be separated by spaces.
+
+calc("1 + ( 2 * 3 ) | =2 ,", {_mode: "space-all"}) // After using the space-all mode, spaces are now required between = 2 and ,. There should be at least one space between each formatted unit, and the number of spaces can vary but not be omitted.
+```
+
+### Primitive method
+
+You can also use methods like plus, sub, mul, div to perform calculations. Although a-calc is primarily designed to address the issue of non-intuitive method writing, if you only have two operands and no need for any formatting, using these methods can provide a certain performance improvement.
+
+```typescript
+import {plus, sub, mul, div, mod, pow, idiv, plus_memo, ...} from "a-calc"
+// All of the above methods will have a memo version, which will not be elaborated on.
+plus(1, 1) // 2
+plus(1, 1, "string") // "2"
+```
+
+## 版本变更
 
 ## Version changes
 
+* 2.0.0 
+
+    - Destructive change: The \_unit parameter now only supports boolean type, the previous space value has been moved to the \_mode parameter.
+    - Destructive change: Previously, the letter case of some formatted sections could be mixed, but now it must be all lowercase. For example, "!u" cannot be written as "!U".
+    - Significant performance improvement, it is now the fastest among similar libraries.
+    - Expose high-performance function methods, for simple arithmetic expressions you can opt to use straightforward functions for invocation, such as: `plus(1, 1)`
+    - Added the configuration for the \_mode mode.
+    - Now it is also possible to configure when the second parameter is an array.
+    - Exposed primitive methods such as plus, subtract, multiply, divide, modulo, power, integer division and their corresponding memo versions.
 * 1.3.9 Solved the problem of failed rounding due to the part of the injection variable in formatting being 0 (Problem reporter: MangMax)
 * 1.3.8 Solved the packaging failure problem caused by the upgrade of vite5.x (Problem reporter: 武建鹏）
 * 1.3.6
