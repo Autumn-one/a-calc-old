@@ -15,7 +15,7 @@
 
 **:corn:Practical** Born from actual business, it covers all practical operations in the business.
 
-> Supported operators :  + - * / % ** 
+> Supported operators :  + - * / % ** //
 
 **Document language：** English | [简体中文](https://github.com/Autumn-one/a-calc-old/blob/main/README_ZH.md)
 
@@ -280,30 +280,28 @@ calc("a + b", {a,b}) // Recommended writing, because it is clearer.
 
 This section will teach you how to squeeze every last bit of performance out of a-calc. a-calc 2.x is several times faster than 1.x at its peak performance.
 
-### Memory cache
+### Enable calculation caching.
 
-You can use the _memo parameter to enable calculation caching. In most cases, we will use variables to participate in calculations. If the formulas composed of variables are the same, then the cache will also be used.
-
-```typescript
-calc("a + b", {a：1， b: 2, _memo: true})
-calc("c + d", {c: 8, d: 9, _memo: true})
-// The two calculations above have not optimized a performance point, that is, the formulas are not universal. The same two numbers are added but different formulas are used, a + b and c + d are different formulas. Although this is the same pattern, a-calc will only remember the same formula.
-calc("a * (b - c)", {a: 1, b: 2, c: 3, _memo: true})
-calc("a * (b - c)", {a: 8, b: 2.88, c: 3.8, _memo: true})
-// The above two can fully utilize the ability of formula memory.
-```
-
-**Cache cleanup**
-
-By default, the cache function is turned off. This is because the cache requires you to decide when to clean it up, otherwise it may cause excessive memory usage. a-calc provides you with a cleanup function, you just need to call it at the right time.
+The `calc`, `fmt`, and `calc_wrap` methods all have corresponding caching methods. The method names are simply the original names followed by `_memo`. The usage is the same as the non-cached versions, but with the added built-in caching functionality.
 
 ```typescript
-import {clear_memo, get_memo_size} from "a-calc"
-
-clear_memo() // By default, a maximum of 5000 cache results are retained. However, if the cache item is used less than 100 times, it will be cleared. Of course, you can also set this yourself.
-clear_memo({maximum: 10000, use_count: 200}) // "maximum" indicates the maximum number of caches retained after cleanup, and "use_count" represents the cleanup of caches with less than this reuse count.
-get_memo_size() // return type: number You can use this method to return the current number of caches, and you can decide whether or not to clear the cache based on this information.
+import { calc_memo, fmt_memo, calc_wrap_memo } from "a-calc"
 ```
+
+These caching methods are not suitable for computing completely random expressions, but even for completely random expressions, there is a way to transform them into versions that can take advantage of caching. The prerequisite is that the formulas between different expressions can be reused. Here is an example:
+
+```typescript
+// The following calculation formula cannot be reused and is not suitable for cached computation.
+calc(`${Math.Random()} + ${Math.Random()}`)
+calc(`${Math.Random()} + ${Math.Random()}`)
+// The following calculation formula is suitable for using cached computation.
+calc_memo("a + b", {a: Math.Random(), b: Math.Random()})
+calc_memo("a + b", {a: Math.Random(), b: Math.Random()})
+```
+
+It can be seen that once we extract a formula like `a + b` from the calculation above, it can be reused. However, please note that `a + b` and `c + d` are considered different formulas!
+
+In conclusion, effectively utilizing caching in calculations can significantly improve performance. This is one of the most impactful techniques for enhancing performance among all performance improvement strategies.
 
 ### The space and space-all modes
 
@@ -341,6 +339,7 @@ plus(1, 1, "string") // "2"
     - Added the configuration for the \_mode mode.
     - Now it is also possible to configure when the second parameter is an array.
     - Exposed primitive methods such as plus, subtract, multiply, divide, modulo, power, integer division and their corresponding memo versions.
+    - Added support for the `//` floor division operator.
 * 1.3.9 Solved the problem of failed rounding due to the part of the injection variable in formatting being 0 (Problem reporter: MangMax)
 * 1.3.8 Solved the packaging failure problem caused by the upgrade of vite5.x (Problem reporter: 武建鹏）
 * 1.3.6
