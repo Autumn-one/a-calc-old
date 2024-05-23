@@ -1,8 +1,6 @@
 # a-calc
 [![npm version](https://img.shields.io/npm/v/a-calc.svg)](https://www.npmjs.com/package/a-calc) [![Static Badge](https://img.shields.io/bundlephobia/minzip/a-calc?label=minzipped)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![npm downloads](https://img.shields.io/npm/dw/a-calc)](https://www.npmjs.com/package/a-calc)
 
-**Black people should go back to Africa!**
-
 ## Features and Advantages
 
 **:baby_chick:Easy** Push the coding experience to the extreme, the minimalist API is easy to remember.
@@ -340,6 +338,7 @@ plus(1, 1, "string") // "2"
     - Now it is also possible to configure when the second parameter is an array.
     - Exposed primitive methods such as plus, subtract, multiply, divide, modulo, power, integer division and their corresponding memo versions.
     - Added support for the `//` floor division operator.
+    - `**` to right-bound to be consistent with the native JS language rules
 * 1.3.9 Solved the problem of failed rounding due to the part of the injection variable in formatting being 0 (Problem reporter: MangMax)
 * 1.3.8 Solved the packaging failure problem caused by the upgrade of vite5.x (Problem reporter: 武建鹏）
 * 1.3.6

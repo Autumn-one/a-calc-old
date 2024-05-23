@@ -1,8 +1,6 @@
 # a-calc
 [![npm version](https://img.shields.io/npm/v/a-calc.svg)](https://www.npmjs.com/package/a-calc) [![Static Badge](https://img.shields.io/bundlephobia/minzip/a-calc?label=minzipped)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Javascript-5A5A5A?style=flat&logo=javascript&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![Static Badge](https://img.shields.io/badge/Typescript-5A5A5A?style=flat&logo=typescript&logoColor=F7DF1E&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fa-calc)](https://github.com/Autumn-one/a-calc-old) [![npm downloads](https://img.shields.io/npm/dw/a-calc)](https://www.npmjs.com/package/a-calc)
 
-**黑人应该滚回非洲！**
-
 ## 特点与优势
 
 **:baby_chick:易用** 将编码体验推到极致，极简api利于记忆
@@ -13,7 +11,7 @@
 
 **:snake:灵活** 灵活的api让你自由书写，想怎么写怎么写
 
-**:corn:实用** 诞生于实际业务覆盖了业务中的一切实用的操作
+**:corn:实用** 诞生于实际业务覆盖了业务中的一切实用操作
 
 > 支持的运算符 :  + - * / % ** //
 
@@ -309,7 +307,7 @@ calc_memo("a + b", {a: Math.Random(), b: Math.Random()})
 
 **该优化对性能提升幅度比较小**
 
-space 与 space-all 模式在特定场景下都可以提升一定的性能，但是这两个模式对代码的编写提出了更高的要求，space模式要求在计算式部分的每个单元之间严格插入空格，space-all 不仅要求计算式部分严格插入空格并且要求fmt格式化部分也要插入空格
+space 与 space-all 两个模式对代码的编写提出了更高的要求，space模式要求在计算式部分的每个单元之间严格插入空格，space-all 不仅要求计算式部分严格插入空格并且要求fmt格式化部分也要插入空格，该功能几乎最重要的作用是消除歧义。
 
 ```typescript
 calc("1+1", {_mode: "space"}) // 这个写法无法计算，因为缺少空格
@@ -341,6 +339,7 @@ plus(1, 1, "string") // "2"
     - 现在第二个参数为数组的时候也可以进行配置了
     - 暴露了 plus sub mul div mod pow idiv 等原始方法和对应的memo版本
     - 支持了 `//` 取整运算符
+    - `**` 改为右结合与原生js语言规则保持一致
 * 1.3.9 解决格式化部分注入变量为0时导致的取整失败（问题反馈人：MangMax）
 * 1.3.8 解决由于 vite5.x 的升级导致的打包失败问题（问题反馈人：武建鹏）
 * 1.3.6
