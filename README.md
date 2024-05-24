@@ -274,60 +274,33 @@ calc(`${a} + ${b}`) // This way of writing is not recommended.
 calc("a + b", {a,b}) // Recommended writing, because it is clearer.
 ```
 
-## High performance
+## space and space-all modes
 
-This section will teach you how to squeeze every last bit of performance out of a-calc. a-calc 2.x is several times faster than 1.x at its peak performance.
-
-### Enable calculation caching.
-
-The `calc`, `fmt`, and `calc_wrap` methods all have corresponding caching methods. The method names are simply the original names followed by `_memo`. The usage is the same as the non-cached versions, but with the added built-in caching functionality.
+The two modes of space and space-ALL put forward higher requirements for code writing. space mode requires strict insertion of Spaces between each unit of the calculation part. Space-all not only requires strict insertion of Spaces in the calculation part but also requires insertion of Spaces in the fmt formatting part. Almost the most important effect of this feature is disambiguation, and the second is that it can improve performance slightly.
 
 ```typescript
-import { calc_memo, fmt_memo, calc_wrap_memo } from "a-calc"
+calc("1+1", {_mode: "space"}) // This formulation cannot be calculated because of the lack of Spaces
+calc("1 + 1", {_mode: "space"}) // This is written correctly
+calc("1 + (2 * 3)", {_mode: "space"}) // This is also correct, because of the special treatment of parentheses, which can be next to internal numbers or variable names or separated by Spaces
+
+calc("1 + ( 2 * 3 ) | =2 ,", {_mode: "space-all"}) // space is also required between =2 and, after using the space-all mode, there must be at least one space between each formatting unit, and the space can be more than less.
 ```
 
-These caching methods are not suitable for computing completely random expressions, but even for completely random expressions, there is a way to transform them into versions that can take advantage of caching. The prerequisite is that the formulas between different expressions can be reused. Here is an example:
+## Original method
+
+You can also use plus sub mul div and other methods to calculate, although the main problem that a-calc solves is that such methods are not intuitive to write the problem, but if you only have two operands and do not need any formatting then using these methods can bring some performance improvement
 
 ```typescript
-// The following calculation formula cannot be reused and is not suitable for cached computation.
-calc(`${Math.Random()} + ${Math.Random()}`)
-calc(`${Math.Random()} + ${Math.Random()}`)
-// The following calculation formula is suitable for using cached computation.
-calc_memo("a + b", {a: Math.Random(), b: Math.Random()})
-calc_memo("a + b", {a: Math.Random(), b: Math.Random()})
-```
-
-It can be seen that once we extract a formula like `a + b` from the calculation above, it can be reused. However, please note that `a + b` and `c + d` are considered different formulas!
-
-In conclusion, effectively utilizing caching in calculations can significantly improve performance. This is one of the most impactful techniques for enhancing performance among all performance improvement strategies.
-
-### The space and space-all modes
-
-Both the space and space-all modes can improve a certain level of performance, but these two modes have higher requirements for code writing. The space mode requires strict insertion of spaces between each unit in the calculation part, while the space-all not only requires spaces to be strictly inserted in the calculation part, but also requires spaces to be inserted in the fmt formatting part.
-
-```typescript
-calc("1+1", {_mode: "space"}) // This writing cannot be computed because it lacks spaces.
-calc("1 + 1", {_mode: "space"}) // This is correct
-calc("1 + (2 * 3)", {_mode: "space"}) // This approach is also correct, as special handling has been applied to parentheses. The parentheses can be placed next to the internal numbers or variable names, or they can be separated by spaces.
-
-calc("1 + ( 2 * 3 ) | =2 ,", {_mode: "space-all"}) // After using the space-all mode, spaces are now required between = 2 and ,. There should be at least one space between each formatted unit, and the number of spaces can vary but not be omitted.
-```
-
-### Primitive method
-
-You can also use methods like plus, sub, mul, div to perform calculations. Although a-calc is primarily designed to address the issue of non-intuitive method writing, if you only have two operands and no need for any formatting, using these methods can provide a certain performance improvement.
-
-```typescript
-import {plus, sub, mul, div, mod, pow, idiv, plus_memo, ...} from "a-calc"
-// All of the above methods will have a memo version, which will not be elaborated on.
+import {plus, sub, mul, div, mod, pow, idiv} from "a-calc"
 plus(1, 1) // 2
 plus(1, 1, "string") // "2"
 ```
 
-## 版本变更
-
 ## Version changes
 
+* 2.1.0
+
+    - Destructive changes: All memo methods have been removed because the memo method brings more code. However, after multi-scenario testing, it can only bring significant performance improvement in specific scenarios. In some business scenarios, it hardly brings performance improvement because the parser performance is high enough. The running time of cache logic often cancels out the parsing time saved, so the overall benefit is too low.
 * 2.0.0 
 
     - Destructive change: The \_unit parameter now only supports boolean type, the previous space value has been moved to the \_mode parameter.
