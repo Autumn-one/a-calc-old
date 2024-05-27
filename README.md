@@ -296,8 +296,31 @@ plus(1, 1) // 2
 plus(1, 1, "string") // "2"
 ```
 
+## Compact Method calc_lite
+
+`calc_lite` is a streamlined version of calc. Its functions are not as comprehensive as calc, but its internal logic is simpler and its performance is stronger than calc (but improvement is a priority). Similarly, there are also some drawbacks. The writing experience is not as good as calc, and it is not as powerful as calc. Some functions are not available in calclite: the function does not support unit operations, does not support mode specification, and does not support calculations like `- ( 3 - - ( -2 ) )`.
+
+The arithmetic and formatting parts of the `calc_lite` function are passed in separately, and all internal units of the calculation must be strictly separated by spaces! This function does not exist to replace `calc`, it is just a streamlined version of calc's logic, sacrificing some infrequently used functionality and writing experience for a limited performance improvement.
+
+Note that this function will not throw any exceptions. By default, when an error occurs, the function will return `-`.
+
+```typescript
+import {calc_lite} from "a-calc"
+
+// The function has a total of 4 parameters, namely calcexpr, fmtexpr, data, err_value = "-", they correspond to the calculation, formatting string, filling data, and return value when an error occurs.
+// Only the first parameter must be passed in, the others can be omitted. If you want to skip passing in, you can pass in null or undefined.
+calc_lite("a + b", null, {a: 0.1, b: 0.2}) // "0.3"
+calc_lite("1 + 2 + b") // "-"
+calc_lite("1", "=2") // "1.00"
+calc_lite("( 1 + 2 ) * 3") // "9" Spaces must be strictly inserted on both sides of the parentheses.
+calc_lite("1+1") // "-" The calculation error is caused by the fact that the units in the calculation are not strictly separated by spaces.
+```
+
 ## Version changes
 
+* 2.2.0
+
+    - Introduce a simpler and higher performance `calc_lite` function.
 * 2.1.0
 
     - Destructive changes: All memo methods have been removed because the memo method brings more code. However, after multi-scenario testing, it can only bring significant performance improvement in specific scenarios. In some business scenarios, it hardly brings performance improvement because the parser performance is high enough. The running time of cache logic often cancels out the parsing time saved, so the overall benefit is too low.
