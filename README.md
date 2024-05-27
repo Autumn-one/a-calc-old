@@ -298,7 +298,7 @@ plus(1, 1, "string") // "2"
 
 ## Compact Method calc_lite
 
-`calc_lite` is a streamlined version of calc. Its functions are not as comprehensive as calc, but its internal logic is simpler and its performance is stronger than calc (but improvement is a priority). Similarly, there are also some drawbacks. The writing experience is not as good as calc, and it is not as powerful as calc. Some functions are not available in calclite: the function does not support unit operations, does not support mode specification, and does not support calculations like `- ( 3 - - ( -2 ) )`.
+`calc_lite` is a streamlined version of calc. Its functions are not as comprehensive as calc, but its internal logic is simpler and its performance is stronger than calc (but the gains are limited). Similarly, there are also some drawbacks. The writing experience is not as good as calc, and it is not as powerful as calc. Some functions are not available in calclite: the function does not support unit operations, does not support mode specification, and does not support calculations like `- ( 3 - - ( -2 ) )`.
 
 The arithmetic and formatting parts of the `calc_lite` function are passed in separately, and all internal units of the calculation must be strictly separated by spaces! This function does not exist to replace `calc`, it is just a streamlined version of calc's logic, sacrificing some infrequently used functionality and writing experience for a limited performance improvement.
 
