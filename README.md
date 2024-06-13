@@ -81,7 +81,7 @@ calc("1 + 1 | !n") // 2
 
 ## About the space
 
-By default, spaces in expressions are not required unless you are using the space or space-all mode. Introductions to these two modes are specifically mentioned in the high performance section. However, I recommend that you always include space in expressions, which looks clearer and more beautiful.
+By default, spaces in expressions are not required, unless you use the space or space-all mode or the calc_lite function, which are introduced in later chapters. However, I recommend that you always include spaces in expressions, which look clearer and nicer.
 
 ## Fill in variables and calculate (important)
 
