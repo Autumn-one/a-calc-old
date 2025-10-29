@@ -316,8 +316,27 @@ calc_lite("( 1 + 2 ) * 3") // "9" Spaces must be strictly inserted on both sides
 calc_lite("1+1") // "-" The calculation error is caused by the fact that the units in the calculation are not strictly separated by spaces.
 ```
 
+## Aggregation Methods
+
+Sometimes we may need to apply the same calculation to multiple data sources and ultimately aggregate all the results. This can be achieved in one step using calc_sum to obtain the results.
+
+```typescript
+calc_sum("a + b | =2", [{a: 1,b: 2 }, {a: 3, b:4}]) // "10.00"
+```
+
+## Performance Comparison
+
+Performance test results are subject to variation and may differ across different hardware configurations. The final metrics should be considered only as a reference for comparing the relative performance between different libraries.
+
+|                                  | `a-calc@2.2.10` | `mathjs@12.4.3` | `mathjs@13.0.2` | `math-expression-evaluator@2.0.4` |
+| -------------------------------- | --------------- | --------------- | --------------- | --------------------------------- |
+| 50,000 calculations runtime(ms)  | 423             | 3791            | 610             | 701                               |
+| 500,000 calculations runtime(ms) | 3650            | 36948           | 5724            | 6764                              |
+
 ## Version changes
 
+* 2.2.15
+    - The calc_sum method is provided, which is an aggregation method, similar to: `options_arr.reduce((memo, data) => calc("expr + memo", {expr, memo, _fill_data: data}), 0)`
 * 2.2.7
 
     - Enhanced documentation will prompt your IDE to display explanations and usage examples for each function as you write them.
@@ -411,15 +430,6 @@ calc_lite("1+1") // "-" The calculation error is caused by the fact that the uni
 * 0.0.72
     * Support writing single numerical values with units, for example `calc("1yuan", {_unit: true})` or `fmt("1yuan | =2",{_unit: true})`
     * Supplement documentation
-
-## Performance Comparison
-
-Performance test results are subject to variation and may differ across different hardware configurations. The final metrics should be considered only as a reference for comparing the relative performance between different libraries.
-
-|                                          | a-calc@2.2.10 | mathjs@12.4.3 | mathjs@13.0.2 | math-expression-evaluator@2.0.4 |
-| ---------------------------------------- | ------------- | ------------- | ------------- | ------------------------------- |
-| 50,000 complex calculations runtime(ms)  | 423           | 3791          | 610           | 701                             |
-| 500,000 complex calculations runtime(ms) | 3650          | 36948         | 5724          | 6764                            |
 
 ## Attention
 
